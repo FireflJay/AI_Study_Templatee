@@ -1,0 +1,1331 @@
+.chat-container {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    background: linear-gradient(to bottom, rgba(31,49,97, 0.2), transparent);
+}
+
+.chat-sidebar {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    background: rgba(13, 15, 44, 0.85);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(32, 156, 255, 0.2);
+    transition: all 0.3s ease;
+    min-width: 400px;
+    min-height: 400px;
+    max-width: 1200px;
+    max-height: 800px;
+    overflow: hidden;
+}
+
+/* *******************************动态流光层（弃用） ↓****************************** */ 
+/* 增强星空背景效果 */
+/* .chat-sidebar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(1px 1px at 10% 10%, rgba(255, 255, 255, 0.9) 0%, rgba(0,0,0,0) 100%),
+        radial-gradient(2px 2px at 20% 20%, rgba(255, 255, 255, 0.8) 0%, rgba(0,0,0,0) 100%),
+        radial-gradient(2px 2px at 30% 30%, rgba(32, 156, 255, 0.8) 0%, rgba(0,0,0,0) 100%),
+        radial-gradient(2px 2px at 40% 40%, rgba(255, 255, 255, 0.9) 0%, rgba(0,0,0,0) 100%),
+        radial-gradient(3px 3px at 50% 50%, rgba(32, 156, 255, 0.7) 0%, rgba(0,0,0,0) 100%),
+        radial-gradient(4px 4px at 60% 60%, rgba(255, 255, 255, 0.6) 0%, rgba(0,0,0,0) 100%),
+        radial-gradient(2px 2px at 70% 70%, rgba(32, 156, 255, 0.8) 0%, rgba(0,0,0,0) 100%),
+        radial-gradient(3px 3px at 80% 80%, rgba(255, 255, 255, 0.8) 0%, rgba(0,0,0,0) 100%),
+        radial-gradient(2px 2px at 90% 90%, rgba(32, 156, 255, 0.7) 0%, rgba(0,0,0,0) 100%);
+    background-size: 300px 300px;
+    animation: stars 60s linear infinite;
+    opacity: 0.5;
+    border-radius: 24px;
+    z-index: 0;
+    transition: opacity 0.3s ease;
+}
+
+@keyframes stars {
+    0% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(-300px); opacity: 0.7; }
+    100% { transform: translateY(-600px); opacity: 0.5; }
+} */
+
+/* ***************************** */
+/* 添加流星效果 */
+/* .chat-sidebar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(45deg, transparent 70%, rgba(32, 156, 255, 0.2) 100%) 300px 300px,
+        linear-gradient(135deg, transparent 70%, rgba(32, 156, 255, 0.2) 100%) 100px 200px,
+        linear-gradient(225deg, transparent 70%, rgba(32, 156, 255, 0.2) 100%) 200px 100px;
+    background-repeat: no-repeat;
+    animation: meteorShower 6s linear infinite;
+    z-index: 0;
+}
+
+@keyframes meteorShower {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) rotate(0deg);
+    }
+    20% {
+        opacity: 1;
+    }
+    60% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.5) rotate(0deg);
+    }
+} */
+
+/* 第一层流光效果 */
+/* .chat-messages::before, */
+.chat-input::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        45deg,
+        rgba(32, 156, 255, 0.15),
+        rgba(255, 255, 255, 0.05),
+        rgba(32, 156, 255, 0.15)
+    );
+    background-size: 200% 200%;
+    animation: flowLight1 15s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* 第二层流光效果 */
+/* .chat-messages::after, */
+.chat-input::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        -45deg,
+        rgba(255, 0, 255, 0.1),
+        rgba(255, 255, 255, 0.03),
+        rgba(255, 0, 255, 0.1)
+    );
+    background-size: 300% 300%;
+    animation: flowLight2 12s linear infinite;
+    pointer-events: none;
+    z-index: -2;
+}
+
+@keyframes flowLight1 {
+    0% { background-position: 0% 50% }
+    50% { background-position: 100% 50% }
+    100% { background-position: 0% 50% }
+}
+
+@keyframes flowLight2 {
+    0% { background-position: 100% 50% }
+    50% { background-position: 0% 50% }
+    100% { background-position: 100% 50% }
+}
+
+/* *******************************↑ 动态流光层 ↓****************************** */ 
+/* Header区域遮罩 */
+.chat-header {
+    position: relative;
+    z-index: 2;
+    background: inherit;
+    box-shadow: 0 15px 20px -10px rgba(13,15,44,0.8);
+}
+
+/* 粒子光点效果 */
+.chat-sidebar::after {
+    content: '';
+    position: absolute;
+    z-index: 0; /* 确保粒子效果在流光层之上 */
+    inset: 0;
+    background: 
+        radial-gradient(
+            circle, 
+            rgba(255, 255, 255, 0.15) 10%,
+            transparent 11%
+        ) 0 0 / 20px 20px repeat;
+    animation: particles 22s linear infinite;
+    pointer-events: none; /* 保证交互不受影响 */
+
+}
+ 
+@keyframes particles {
+    0% { background-position: 0 0 }
+    100% { background-position: 100% 100% }
+}
+
+/* ***************************动态流光层 ↑************************************* */
+
+/* **************************AI 聊天窗口头部 ↓ ******************************** */
+/* 优化头部样式 */
+.chat-header {
+    flex-shrink: 0;
+    padding: 1.5rem;
+    background: linear-gradient(90deg, 
+        rgba(13, 15, 44, 0.98), 
+        rgba(32, 39, 82, 0.98)
+    );
+    border-radius: 24px 24px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(32, 156, 255, 0.3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 优化标题样式 */
+.chat-header-left {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    z-index: 1;
+}
+
+.chat-header-left h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-shadow: 
+        0 0 10px rgba(32, 156, 255, 0.5),
+        0 0 20px rgba(32, 156, 255, 0.3),
+        0 0 30px rgba(32, 156, 255, 0.2);
+    letter-spacing: 1px;
+    /* 聊天款的标题字体渐变 */
+    background: linear-gradient(90deg, #fff, #89CFF0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: titleGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+    from {
+        filter: drop-shadow(0 0 2px rgba(32, 156, 255, 0.5));
+    }
+    to {
+        filter: drop-shadow(0 0 8px rgba(32, 156, 255, 0.8));
+    }
+}
+
+/* 优化头像样式 */
+.chat-header-left img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid rgba(32, 156, 255, 0.3);
+    padding: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 0 10px rgba(32, 156, 255, 0.3),
+        0 0 20px rgba(32, 156, 255, 0.2);
+    animation: avatarGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes avatarGlow {
+    from {
+        box-shadow: 
+            0 0 10px rgba(32, 156, 255, 0.3),
+            0 0 20px rgba(32, 156, 255, 0.2);
+    }
+    to {
+        box-shadow: 
+            0 0 15px rgba(32, 156, 255, 0.5),
+            0 0 30px rgba(32, 156, 255, 0.3);
+    }
+}
+
+/* 优化头部右侧布局 */
+.chat-header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 1;
+}
+
+/* 状态指示器容器 */
+.status-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    background: rgba(32, 156, 255, 0.1);
+    border-radius: 20px;
+    border: 1px solid rgba(32, 156, 255, 0.2);
+}
+
+/* 在线状态指示器 */
+.ai-status {
+    width: 8px;
+    height: 8px;
+    background: linear-gradient(45deg, #4CAF50, #45ff45);
+    border-radius: 50%;
+    box-shadow: 0 0 10px #4CAF50;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* 设置按钮容器 */
+.settings-container {
+    display: flex;
+    align-items: center;
+}
+
+/* **************************AI 聊天窗口头部 ↑ ******************************** */
+
+
+/* **************************AI 消息区域样式 ↓****************************** */
+/* 消息区域样式 */
+.chat-messages {
+    flex: 1 1 0;
+    overflow-y: auto; /* 改为自动滚动 */
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: transparent;
+    position: relative;
+    z-index: 1;
+    min-height: 0;
+    max-height: calc(100% - 120px);
+    overflow-x: hidden;/* 裁剪溢出的流光效果 */
+}
+
+/* 消息基础样式 */
+.message {
+    max-width: 80%;
+    width: fit-content;
+    padding: 1rem 1.2rem;
+    border-radius: 16px;
+    position: relative;
+    background: transparent !important;
+    border: none !important;
+    margin: 0 1rem 0 0;
+    /* 新增 */
+    overflow: visible; /* 允许子元素溢出 */
+}
+
+/* AI消息修复 */
+.message.ai {
+    align-self: flex-start;
+    margin: 0 0 0 1rem;
+}
+
+/* 用户消息专属修复 */
+.message.user {
+    align-self: flex-end !important; /* 强制右对齐 */
+    margin: 0 1rem 0 auto !important; /* 右侧留白+左自动间距 */
+}
+
+/* 修复子元素选择器（关键修复） */
+.message .content { /* 添加空格表示子元素 */
+    position: relative;
+    z-index: 3; /* 提升层级 */
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+}
+
+.message .effect { /* 添加空格表示子元素 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    overflow: hidden;
+    z-index: 1;
+    backdrop-filter: blur(5px);
+}
+
+/* 用户消息效果容器 */
+.message.user .effect {
+    background: linear-gradient(135deg, 
+        rgba(32, 156, 255, 0.2), 
+        rgba(32, 156, 255, 0.1)
+    ) !important; /* 原始用户渐变 */
+    border: 1px solid rgba(32, 156, 255, 0.3) !important; /* 原始用户边框 */
+}
+
+/* 修复AI消息样式 */
+/* 添加空格 */
+/* .message.ai .effect { 
+    background: linear-gradient(135deg,
+     rgba(13, 15, 44, 0.8),
+     rgba(32, 39, 82, 0.8));
+    border: 1px solid rgba(32, 156, 255, 0.2);
+} */
+.message.ai .effect {
+    background: linear-gradient(135deg, 
+        rgba(13, 15, 44, 0.8), 
+        rgba(32, 39, 82, 0.8)
+    ) !important; /* 原始AI渐变 */
+    border: 1px solid rgba(32, 156, 255, 0.2) !important;
+}
+
+/* message 流光效果 */
+.message .effect::after { /* 添加空格 */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(32, 156, 255, 0.2), /* 增强透明度 */
+        transparent 
+    );
+    animation: messageShine 8s linear infinite;
+    animation-delay: var(--shine-delay, 0s);
+    pointer-events: none;
+    z-index: 2; /* 添加层级 */
+}
+
+@keyframes messageShine {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(200%); }
+}
+
+/* 确保内容可见性 */
+.message .content {
+    position: relative;
+    mix-blend-mode: screen; /* 增强文字对比度 */
+    text-shadow: 0 0 2px rgba(0,0,0,0.2); /* 添加文字阴影 */
+}
+
+/* 增强布局稳定性 */
+.message {
+    flex-shrink: 0; /* 防止挤压变形 */
+    min-width: min-content; /* 保持最小内容宽度 */
+}
+
+/* 禁用水平滚动条 */
+.chat-messages {
+    overflow-x: hidden !important;
+    overflow-y: auto;
+}
+
+/* 保持垂直滚动条样式 */
+.chat-messages::-webkit-scrollbar {
+    width: 8px;
+    height: 0; /* 隐藏水平滚动条 */
+}
+
+/* 确保聊天消息容器间距 */
+.chat-messages {
+    padding: 1.5rem; /* 保留原始容器内边距 */
+}
+
+/* ********************AI 消息区域样式 ↑**************************** */
+
+/* *********************用户 message 区域样式 ↓************************** */
+/* 输入区域样式 */
+
+/* 输入框聊天框分界线 */
+.chat-input {
+    margin-top: auto;
+    padding: 1.2rem;
+    background: transparent;
+    border-top: 1px solid rgba(32, 156, 255, 0.2);
+    border-radius: 0 0 24px 24px;
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+}
+
+/* 优化发送按钮区域 */
+.chat-input-container {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: rgba(13, 15, 44, 0.2);/*初始 0.5*/
+    padding: 0.8rem 1.2rem;
+    border-radius: 15px;
+    border: 1px solid rgba(32, 156, 255, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+/* 输入框滚动条样式 */
+#chatInput::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    display: block;
+}
+
+#chatInput::-webkit-scrollbar-track {
+    background: rgba(13, 15, 44, 0.5);
+    border-radius: 5px;
+    margin: 2px;
+    border: 1px solid rgba(32, 156, 255, 0.1);
+}
+
+#chatInput::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+        90deg,
+        rgba(13, 15, 44, 0.8),
+        rgba(32, 39, 82, 0.8)
+    );
+    border-radius: 5px;
+    border: 2px solid rgba(32, 156, 255, 0.2);
+    box-shadow: 
+        0 0 10px rgba(32, 156, 255, 0.3),
+        inset 0 0 6px rgba(32, 156, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+#chatInput::-webkit-scrollbar-thumb::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(32, 156, 255, 0.2),
+        transparent
+    );
+    animation: scrollThumbShine 3s linear infinite;
+}
+
+/* 滚动条边缘发光效果 */
+#chatInput::-webkit-scrollbar-track::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 5px;
+    box-shadow: 
+        inset 0 0 2px rgba(32, 156, 255, 0.3),
+        0 0 4px rgba(32, 156, 255, 0.2);
+    pointer-events: none;
+}
+
+/* 优化输入框样式 */
+#chatInput {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 0.95rem;
+    padding: 0.5rem;
+    resize: none;
+    width: 100%;
+    outline: none;
+    min-height: 24px;
+    max-height: 150px;
+    overflow-y: auto;
+    scrollbar-width: thin;  /* 为Firefox添加细滚动条 */
+    scrollbar-color: rgba(32, 156, 255, 0.3) rgba(13, 15, 44, 0.5);  /* 为Firefox设置滚动条颜色 */
+}
+
+#chatInput::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/****** 输入框样式 ↓ ******/
+/* 核心字体样式 */
+#chatInput {
+    font-family: 'Inter', 'SF Pro Display', 'Segoe UI', Roboto, system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0.2px;
+    color: #e0e0e0; /* 浅灰色文字 */
+}
+
+/* 选中文字时的样式 */
+#chatInput::selection {
+    background-color: rgba(74, 144, 226, 0.3); /* 蓝色半透明 */
+    color: inherit;
+}
+
+/* 输入框聚焦时文字阴影 */
+#chatInput:focus {
+    outline: none;
+    text-shadow: 0 0 4px rgba(74, 144, 226, 0.2);
+}
+
+/* 悬停时字体优化 */
+#chatInput:hover {
+    font-weight: 500;
+    transition: font-weight 0.2s ease;
+}
+
+/* 渐变文字颜色 ，未来可以考虑 */
+/* #chatInput {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(120deg, #4a90e2, #6c5ce7);
+} */
+
+/* 打字机效果光标 */
+#chatInput:focus {
+    caret-color: #4a90e2;
+    caret-shape: bar;
+    caret-width: 2px;
+}
+/****** 输入框样式 ↑ ******/
+
+/* ******发送按钮模块 ↓****** */
+/* 发送按钮容器 */
+.send-button-container {
+    display: flex;/*将容器设置为 弹性布局*/
+    align-items: center;/*控制子元素在 交叉轴（垂直方向）的对齐方式。子元素会在垂直方向上 居中显示。*/
+    gap: 0.5rem;/*设置子元素之间的 间距。*/
+    position: relative; /* 创建定位上下文,将容器设置为 相对定位*/
+
+}
+
+/* 发送按钮样式 */
+#sendMessage {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(90deg, rgba(32, 156, 255, 0.3), rgba(32, 156, 255, 0.2));
+    border: 1px solid rgba(32, 156, 255, 0.3);
+    padding: 0.6rem 1rem;
+    border-radius: 12px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 发送按钮动画效果 */
+#sendMessage::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+/* 添加光晕效果（效果一般） */
+/* box-shadow: 0 0 12px rgba(74, 144, 226, 0.4); */
+
+/* 增强颜色对比 （可选用）*/
+/* background-image: linear-gradient(45deg, #4a90e2, #6c5ce7); */
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(32, 156, 255, 0.3),
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: buttonShine 2.8s ease-in-out infinite;
+}
+
+@keyframes buttonShine {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    50% { transform: translateX(100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+
+#sendMessage:hover {
+    background: linear-gradient(90deg, rgba(32, 156, 255, 0.4), rgba(32, 156, 255, 0.3));
+    box-shadow: 
+        0 0 15px rgba(32, 156, 255, 0.3),
+        0 0 30px rgba(32, 156, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+/* 添加 "发送" 按钮悬停时的提示框 */
+.send-tooltip {
+    /* 定位设置 */
+    position: absolute;
+    bottom: calc(100% + 10px); /* 距离按钮顶部10px */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* 视觉样式 */
+    background: linear-gradient(135deg, 
+        rgba(13, 15, 44, 0.95),
+        rgba(32, 39, 82, 0.95));
+    padding: 6px 12px;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 0.8rem;
+    border: 1px solid rgba(32, 156, 255, 0.3);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    backdrop-filter: blur(5px);
+    white-space: nowrap;
+    
+    /* 初始状态 */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 9999;
+}
+/* 悬停效果 */
+#sendMessage:hover + .send-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -5px);
+}
+
+    /* 炫酷悬停效果 */
+#sendMessage:hover::after {
+    animation: buttonShine 3s ease-in-out infinite;
+  
+}
+
+
+#sendMessage svg {
+    width: 16px;
+    height: 16px;
+    margin-left: 4px;
+}
+
+/* ******发送按钮模块 ↑****** */
+
+
+/* 优化滚动条样式 */
+.chat-messages::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    display: block;
+    margin: 0;
+    min-height: 40px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: rgba(13, 15, 44, 0.5);
+    border-radius: 5px;
+    min-height: 40px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+        90deg,
+        rgba(13, 15, 44, 0.8),
+        rgba(32, 39, 82, 0.8)
+    );
+    border-radius: 5px;
+    border: 2px solid rgba(32, 156, 255, 0.2);
+    box-shadow: 0 0 10px rgba(32, 156, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+    min-height: 40px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(32, 156, 255, 0.2),
+        transparent
+    );
+    animation: scrollThumbShine 3s linear infinite;
+}
+
+@keyframes scrollThumbShine {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(100%); }
+}
+
+/* *********************用户 message 区域样式 ↑ ************************** */
+
+/* ********************* AI 聊天框其他样式 ↓ ************************** */
+
+/* 修改设置按钮样式 */
+.settings-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.settings-btn:hover {
+    background: rgba(32, 156, 255, 0.2);
+    box-shadow: 0 0 15px rgba(32, 156, 255, 0.3);
+}
+
+.settings-btn svg {
+    filter: drop-shadow(0 0 2px rgba(32, 156, 255, 0.5));
+}
+
+/* 配置对话框样式 */
+.settings-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1100;
+    backdrop-filter: blur(5px);
+}
+
+.settings-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.settings-content {
+    background: white;
+    border-radius: 16px;
+    width: 500px;
+    max-width: 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.settings-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.settings-header h3 {
+    margin: 0;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+    padding: 0.5rem;
+}
+
+.settings-body {
+    padding: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #2196F3;
+}
+
+.settings-footer {
+    padding: 1.5rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.settings-footer button {
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.cancel-btn {
+    background: #f5f5f5;
+    border: none;
+    color: #666;
+}
+
+.save-btn {
+    background: #2196F3;
+    border: none;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background: #eee;
+}
+
+.save-btn:hover {
+    background: #1976D2;
+}
+
+.minimize-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.minimize-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+@keyframes messageSlide {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 还原大小按钮容器 */
+.restore-size-container {
+    display: flex;
+    align-items: center;
+    padding: 0.4rem 0.8rem;
+    background: rgba(32, 156, 255, 0.1);
+    border-radius: 20px;
+    border: 1px solid rgba(32, 156, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.restore-size-container:hover {
+    background: rgba(32, 156, 255, 0.2);
+    box-shadow: 0 0 15px rgba(32, 156, 255, 0.3);
+}
+
+/* 还原大小图标 */
+.restore-size-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.restore-size-btn svg {
+    width: 18px;
+    height: 18px;
+    filter: drop-shadow(0 0 2px rgba(32, 156, 255, 0.5));
+}
+
+/* ********************* AI 聊天框其他样式 ↑ ************************** */
+
+
+/* **********************缩放手柄模块 ↓************************ */
+/* 添加拖拽手柄 */
+.resize-handle {
+    position: absolute;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* 右下角拖拽手柄 */
+.resize-handle-se {
+    right: 0;
+    bottom: 0;
+    width: 15px;
+    height: 15px;
+    cursor: se-resize;
+    background: linear-gradient(
+        135deg,
+        transparent 0%,
+        transparent 50%,
+        rgba(32, 156, 255, 0.3) 50%,
+        rgba(32, 156, 255, 0.3) 100%
+    );
+    border-radius: 0 0 24px 0;
+}
+
+/* 左下角拖拽手柄 */
+.resize-handle-sw {
+    left: 0;
+    bottom: 0;
+    width: 15px;
+    height: 15px;
+    cursor: sw-resize;
+    background: linear-gradient(
+        225deg,
+        transparent 0%,
+        transparent 50%,
+        rgba(32, 156, 255, 0.3) 50%,
+        rgba(32, 156, 255, 0.3) 100%
+    );
+    border-radius: 0 0 0 24px;
+}
+
+/* 右上角拖拽手柄 */
+.resize-handle-ne {
+    right: 0;
+    top: 0;
+    width: 15px;
+    height: 15px;
+    cursor: ne-resize;
+    background: linear-gradient(
+      45deg,
+      transparent 0%,
+      transparent 50%,
+      rgba(32, 156, 255, 0.3) 50%,
+      rgba(32, 156, 255, 0.3) 100%
+    );
+    border-radius: 0 24px 0 0;
+  }
+  
+  /* 左上角拖拽手柄 */
+  .resize-handle-nw {
+    left: 0;
+    top: 0;
+    width: 15px;
+    height: 15px;
+    cursor: nw-resize;
+    background: linear-gradient(
+      315deg,
+      transparent 0%,
+      transparent 50%,
+      rgba(32, 156, 255, 0.3) 50%,
+      rgba(32, 156, 255, 0.3) 100%
+    );
+    border-radius: 24px 0 0 0;
+  }
+
+/* 显示拖拽手柄 */
+.chat-sidebar:hover .resize-handle {
+    opacity: 1;
+}
+
+/* 拖拽时的效果 */
+.chat-sidebar.resizing {
+    transition: none;
+    user-select: none;
+}
+
+.chat-sidebar.resizing .resize-handle {
+    opacity: 1;
+} 
+
+/* **********************缩放手柄模块 ↑ ************************ */
+
+
+/* 终止响应使用相同的背景渐变、边框样式和动画效果等新增css */
+.message {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.message-content-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* 错误状态样式 */
+.message.error .content {
+    color: #ff5757;
+}
+
+.message.error .effect {
+    background: linear-gradient(135deg, 
+        rgba(255, 87, 87, 0.1), 
+        rgba(255, 87, 87, 0.05)
+    ) !important;
+    border: 1px solid rgba(255, 87, 87, 0.2) !important;
+}
+
+/* 已终止状态 */
+.message.stopped .content {
+    opacity: 0.7;
+    font-style: italic;
+}
+
+/* ***************聊天框的终止思考按钮和重新生成按钮的样式 ↓******************* */
+/* 终止思考按钮容器 */
+.stop-thinking-container {
+    position: sticky;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    z-index: 5;
+}
+
+/* 终止思考按钮样式 */
+.stop-thinking-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    background: linear-gradient(90deg, 
+        rgba(255, 87, 87, 0.3), 
+        rgba(255, 87, 87, 0.2));
+    border: 1px solid rgba(255, 87, 87, 0.3);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.stop-thinking-btn:hover {
+    background: linear-gradient(90deg, 
+        rgba(255, 87, 87, 0.4), 
+        rgba(255, 87, 87, 0.3));
+    box-shadow: 0 0 15px rgba(255, 87, 87, 0.3);
+}
+
+/* 重新生成按钮 */
+.regenerate-btn {
+    position: absolute;
+    left: 15px;
+    bottom: -25px;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 15px;
+    background: linear-gradient(90deg,
+        rgba(32, 156, 255, 0.3),
+        rgba(32, 156, 255, 0.2));
+    border: 1px solid rgba(32, 156, 255, 0.3);
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.regenerate-btn:hover {
+    background: linear-gradient(90deg,
+        rgba(32, 156, 255, 0.4),
+        rgba(32, 156, 255, 0.3));
+    transform: translateY(-2px);
+}
+
+.regenerate-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* *** */
+/* 调整重新生成按钮位置 */
+.regenerate-btn {
+    position: absolute;
+    left: 60px; /* 保持左侧基准位置 */
+    bottom: -37px;
+    z-index: 10;
+    margin: 0;
+    transition: all 0.3s ease;
+}
+
+
+/* 添加悬停提示 */
+.regenerate-btn:hover::after {
+    content: "重新生成";
+    position: absolute;
+    z-index: 9999; /* 新增层级提升 */
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+     /* 增强背景效果 */
+     background: linear-gradient(135deg, 
+    rgba(13, 15, 44, 0.95),
+    rgba(32, 39, 82, 0.95));
+    padding: 6px 12px;       
+     /* background: rgba(13, 15, 44, 0.9); */
+    border-radius: 8px;
+    font-size: 0.8rem;
+    color: #fff;
+    border: 1px solid rgba(32, 156, 255, 0.3);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    white-space: nowrap;
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    animation: tooltipFade 0.3s ease forwards;
+}
+
+@keyframes tooltipFade {
+    from { opacity: 0; transform: translate(-50%, 5px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* 调整消息容器 */
+.message {
+    padding-bottom: 1.5rem; /* 为按钮预留空间 */
+
+    position: relative;
+    margin-bottom: 2rem;
+     /* 确保间距,上两行新增可删 */
+}
+
+/* 新增停止状态按钮样式 ，可删*/
+.message.stopped .regenerate-btn {
+    display: flex !important; /* 强制显示按钮 */
+}
+
+/* ***************聊天框 终止思考、重新生成按钮的样式 ↑***************** */
+
+/********************** 复制按钮样式 ↓ ***************************/
+.copy-btn {
+    position: absolute;
+    left: calc(60px - 42px - 5px); /* 按钮宽度+间距 */
+    bottom: -37px;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 15px;
+    background: linear-gradient(90deg,
+        rgba(67, 217, 173, 0.3),
+        rgba(67, 217, 173, 0.2));
+    border: 1px solid rgba(67, 217, 173, 0.3);
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    z-index: 10;
+}
+
+.copy-btn:hover {
+    background: linear-gradient(90deg,
+        rgba(67, 217, 173, 0.4),
+        rgba(67, 217, 173, 0.3));
+    transform: translateY(-2px);
+}
+
+/* 复制悬停按钮提示 */
+.copy-btn:hover::after {
+    content: "复制内容";
+    position: absolute;
+    z-index: 9999;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, 
+        rgba(13, 15, 44, 0.95),
+        rgba(32, 39, 82, 0.95));
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    color: #fff;
+    border: 1px solid rgba(67, 217, 173, 0.3);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    white-space: nowrap;
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    animation: tooltipFade 0.3s ease forwards;
+}
+
+/* 复制成功提示 */
+.copy-success {
+    position: absolute;
+    left: 50%;
+    /* top: 50%; */
+    transform: translate(-50%, 0);
+    /* transform: translate(-50%, -50%); */
+    /* 使用left: 50% + transform: translateX(-50%)实现水平居中 */
+    padding: 0.4rem 0.8rem;
+    background: linear-gradient(135deg, 
+        rgba(67, 217, 173, 0.3),
+        rgba(67, 217, 173, 0.2));
+    border: 1px solid rgba(67, 217, 173, 0.3);
+    color: #fff;
+    border-radius: 15px;
+    animation: floatUp 1.5s ease forwards;
+    z-index: 100;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    0% { 
+        opacity: 1; 
+        transform: translate(-50%, -50%); 
+    }
+    100% { 
+        opacity: 0; 
+        transform: translate(-50%, -80px); /* 保持水平居中上浮 */
+    }
+}
+
+/* 调整消息容器 */
+.message.ai {
+    /* 增加底部空间 */
+    /* padding-bottom: 50px;  */
+}
+
+/********************** 复制按钮样式  ↑ ***************************/
+
+ /* 超链接丝滑小动画，还没实现，后续完善 */
+/* 
+#chat-section {
+    scroll-margin-top: 80px;
+  } */
+
+

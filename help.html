@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI+ 结构化学习平台-帮助</title>
+    <link rel="stylesheet" href="styles/cebianlan.css">
+
+    <!-- 添加科技感字体 01 -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"> -->
+
+    <!-- 加载Google Fonts的Orbitron字体，优化字体加载：属于预加载的一种方式，使用stylesheet类型。 -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet"> -->
+
+    <!-- preconnect是用来提前建立HTTP连接，减少后续请求的延迟。包括DNS查找、TCP连接和TLS握手，这样后续请求字体文件时会更快。 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- 加载Swiper和AOS的CSS文件，都是外部资源：比如轮播图和动画效果。 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
+    <!-- 导航栏 css -->
+    <link rel="stylesheet" href="./styles/head.css">
+    <!-- <link rel="stylesheet" href="./styles/main.css"> -->
+     <!-- <link rel="stylesheet" href="./styles/test.css" -->
+
+</head>
+
+<body>
+    <!-- 全局导航 -->
+    <nav id="homehelp" class="main-nav">
+        <div class="nav-network"></div>
+        <div class="nav-logo">
+            <h1>AI+ 结构化学习平台</h1>
+            <a href="https://github.com/FireflJay/test5" class="github-icon" target="_blank">
+                <img src="./images/github-mark.png" alt="GitHub" class="default-icon">
+                <img src="./images/github-mark-white.png" alt="GitHub" class="hover-icon">
+            </a>
+        </div>
+        <div class="nav-search">
+            <input type="text" placeholder="别试了搜不到的...">
+            <button class="search-btn">搜一搜</button>
+        </div>
+        <div class="nav-menu">
+            <a href="index.html" class="active">首页</a>
+            <a href="index.html#chat-section">AI 对话</a>
+            <a href="index.html#modules-section">模块化学习</a>
+            <a href="index.html#content-section">AI+ 工具矩阵</a>
+            <a href="help.html">帮助</a>
+            <a href="https://www.deepseek.com/"
+                class="github-link" 
+                target="_blank" 
+                title="管理员模块（敬请期待）">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 98 96">
+                    <!-- <img src="./images/icons8-deepseek-64.png" alt="AI" width="30" height="30"> -->
+
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z" fill="currentColor"/>
+                </svg>
+            </a>
+        </div>
+    </nav>
+    <!-- <nav class="global-nav">
+        <div class="nav-content">
+            <a href="index.html" class="nav-logo">
+                <img src="images/Deepseek.png" alt="DeepSeek">
+            </a>
+            <div class="nav-links">
+                <a href="index.html">首页</a>
+                <a href="#" class="active">AI基础</a>
+                <a href="#">服务</a>
+                <a href="#">关于</a>
+            </div>
+        </div>
+    </nav> -->
+
+    <!-- 主要内容模块 -->
+    <div class="main-container">
+    <!-- 左侧导航 -->
+
+        <!-- 侧边导航栏的结构 -->
+    <nav class="side-nav">
+        <!-- 主内容区域顶部的空格 -->
+        <div class="nav-wrapper">
+            <!-- 首页左边的绿色光点 -->
+            <div class="progress-indicator"></div>
+            <!-- 目录内容的样式 -->
+            <ul class="chapter-list">
+                <!-- 首页 -->
+                <li>
+                    <a href="index.html" class="nav-parent">
+                        <svg class="nav-item-icon" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"/>
+                        </svg>
+                        首页
+                    </a>
+                </li>
+
+                <!-- 目錄 -->
+                <li class="chapter-list-item has-children top-level-menu permanent-active">
+                    <div class="nav-parent nav-top-parent">
+                        <svg class="nav-item-icon" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M12,3L1,9L12,15L21,10.09V17H23V9M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18Z"/>
+                        </svg>
+                        <span class="nav-label">结构化学习平台-帮助</span>
+                    </div>
+                    <ul class="nav-children nav-top-children">
+
+                        <!-- 了解 AI 模块 -->
+                        <li class="has-children submenu-item">
+                            <div class="nav-sub-parent">
+                                <a href="#bz1" class="nav-link">了解 AI</a>
+                                <svg class="nav-sub-toggle" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+                                </svg>
+                            </div>
+                            <ul class="nav-sub-children">
+                                <li><a href="#" class="nav-link">二级目录项1</a></li>
+                                <li><a href="#" class="nav-link">二级目录项2</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- AI 的使用模块 -->
+                        <li class="has-children submenu-item">
+                            <div class="nav-sub-parent">
+                                <a href="#bz1" class="nav-link">AI 的使用</a>
+                                <svg class="nav-sub-toggle" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+                                </svg>
+                            </div>
+                            <ul class="nav-sub-children">
+                                <li><a href="#" class="nav-link">二级目录项1</a></li>
+                                <li><a href="#" class="nav-link">二级目录项2</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- AI+ 办公模块 -->
+                        <li class="has-children submenu-item">
+                            <div class="nav-sub-parent">
+                                <a href="#bz1" class="nav-link">AI+ 办公</a>
+                                <svg class="nav-sub-toggle" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+                                </svg>
+                            </div>
+                            <ul class="nav-sub-children">
+                                <li><a href="#" class="nav-link">二级目录项1</a></li>
+                                <li><a href="#" class="nav-link">二级目录项2</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- AI+ 文本模块 -->
+                        <li class="has-children submenu-item">
+                            <div class="nav-sub-parent">
+                                <a href="#bz1" class="nav-link">AI+ 文本</a>
+                                <svg class="nav-sub-toggle" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+                                </svg>
+                            </div>
+                            <ul class="nav-sub-children">
+                                <li><a href="#" class="nav-link">二级目录项1</a></li>
+                                <li><a href="#" class="nav-link">二级目录项2</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- AI+ 图像模块 -->
+                        <li class="has-children submenu-item">
+                            <div class="nav-sub-parent">
+                                <a href="#bz1" class="nav-link">AI+ 图像</a>
+                                <svg class="nav-sub-toggle" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+                                </svg>
+                            </div>
+                            <ul class="nav-sub-children">
+                                <li><a href="#" class="nav-link">二级目录项1</a></li>
+                                <li><a href="#" class="nav-link">二级目录项2</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- AI+ 剪辑模块 -->
+                        <li class="has-children submenu-item">
+                            <div class="nav-sub-parent">
+                                <a href="#bz1" class="nav-link">AI+ 剪辑</a>
+                                <svg class="nav-sub-toggle" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+                                </svg>
+                            </div>
+                            <ul class="nav-sub-children">
+                                <li><a href="#" class="nav-link">二级目录项1</a></li>
+                                <li><a href="#" class="nav-link">二级目录项2</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- AI+ 编程模块 -->
+                        <li class="has-children submenu-item">
+                            <div class="nav-sub-parent">
+                                <a href="#bz1" class="nav-link">AI+ 编程</a>
+                                <svg class="nav-sub-toggle" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+                                </svg>
+                            </div>
+                            <ul class="nav-sub-children">
+                                <li><a href="#" class="nav-link">二级目录项1</a></li>
+                                <li><a href="#" class="nav-link">二级目录项2</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- AI Agent 模块 -->
+                        <li class="has-children submenu-item">
+                            <div class="nav-sub-parent">
+                                <a href="#bz1" class="nav-link">AI Agent</a>
+                                <svg class="nav-sub-toggle" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+                                </svg>
+                            </div>
+                            <ul class="nav-sub-children">
+                                <li><a href="#" class="nav-link">二级目录项1</a></li>
+                                <li><a href="#" class="nav-link">二级目录项2</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- 更多内容，敬请期待... -->
+                        <li class="has-children submenu-item">
+                            <div class="nav-sub-parent">
+                                <a href="#bz1" class="nav-link">更多</a>
+                                <svg class="nav-sub-toggle" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+                                </svg>
+                            </div>
+                            <ul class="nav-sub-children">
+                                <li><a href="#" class="nav-link">二级目录项1</a></li>
+                                <li><a href="#" class="nav-link">二级目录项2</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </li>
+
+                 <!-- 三、底部 -->
+                 <li class="has-children">
+                    <a href="index.html#chat-section">
+                        <svg class="nav-item-icon" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M12,3C7.58,3 4,4.79 4,7C4,9.21 7.58,11 12,11C16.42,11 20,9.21 20,7C20,4.79 16.42,3 12,3M4,9V12C4,14.21 7.58,16 12,16C16.42,16 20,14.21 20,12V9C20,11.21 16.42,13 12,13C7.58,13 4,11.21 4,9M4,14V17C4,19.21 7.58,21 12,21C16.42,21 20,19.21 20,17V14C20,16.21 16.42,18 12,18C7.58,18 4,16.21 4,14Z"/>
+                        </svg>
+                        召唤deepseek
+                    </a>
+                </li>
+
+                <!-- <li class="has-children">
+                    <a href="index.html#ai-service-link footer-style-link">
+                        <svg class="nav-item-icon" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M12,3C7.58,3 4,4.79 4,7C4,9.21 7.58,11 12,11C16.42,11 20,9.21 20,7C20,4.79 16.42,3 12,3M4,9V12C4,14.21 7.58,16 12,16C16.42,16 20,14.21 20,12V9C20,11.21 16.42,13 12,13C7.58,13 4,11.21 4,9M4,14V17C4,19.21 7.58,21 12,21C16.42,21 20,19.21 20,17V14C20,16.21 16.42,18 12,18C7.58,18 4,16.21 4,14Z"/>
+                        </svg>
+                        召唤AI客服
+                    </a>
+                </li> -->
+
+                <div class="ai-service-container">
+                    <a href="#" id="summonAIService" class="ai-service-link nav-top-parent">
+                        <svg class="nav-item-icon" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 12,2M18,13H13V18H11V13H6V11H11V6H13V11H18V13Z"/>
+                        </svg>
+                        召唤AI客服
+                    </a>
+                </div>
+
+            </ul>
+            <!-- 在侧边栏的 chapter-list 之后添加 -->
+             <!-- 侧边栏召唤AI客服测试 -->
+                    <div class="ai-service-container">
+                        <a href="#" id="summonAIService" class="ai-service-link nav-parent">
+                            <svg class="nav-item-icon" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 12,2M18,13H13V18H11V13H6V11H11V6H13V11H18V13Z"/>
+                            </svg>
+                            召唤AI客服
+                        </a>
+                    </div>
+        </div>
+    </nav>
+
+
+<!-- ************************主要内容模块************************ -->
+        <main class="content">
+            <!-- 标题区 -->
+            <div class="hero-section" id="intro">
+                <h1>AI+ 结构化学习平台-帮助</h1>
+                <p class="subtitle">雖然給不到你什麼帮助</p>
+                <div class="particle-background"></div>
+            </div>
+
+     <!-- 模块一 -->
+            <aside class="resources">
+                <!-- <section> -->
+                <h3>lalala，欢迎来到AI的世界！</h3>
+            </aside>
+
+            <!-- 内容区块 -->
+            <div class="content-sections">
+                <!-- 各章节内容 -->
+                 
+                <section class="content-card">
+                    
+                    <h2>简单写个幫助吧，管它能不能帮到您</h2>
+                    <!-- <p></p> -->
+                    <!-- <div class="interactive-diagram"> -->
+                        <!-- 交互式图表将通过JavaScript动态生成 -->
+                    <!-- </div> -->
+
+                 <!-- 其他章节类似... -->
+
+            <!-- </section> -->
+            </div>
+
+
+    <!-- 模块二 -->
+            <!-- 扩展资源 -->
+            <aside class="resources">
+                <!-- <section> -->
+                    <br>
+                <!-- <h3>得加钱</h3> -->
+                <!-- <div class="resource-cards">
+                    资源卡片
+                </div> -->
+                <!-- </section> -->
+
+
+                <section class="content-card">
+                    <p id="bz3"></p>
+                     <!-- 帮助页面标题 -->
+                    <h2 class="help-title">AI学习助手指南</h2>
+                    <!-- 快速入门模块 -->
+                    <div class="help-section">
+                        <h3>新手入门 <span class="icon-arrow">▼</span></h3>
+                        <div class="content">
+                            <p>从零开始学习AI的三个步骤：</p>
+                            <ol>
+                                <li>掌握Python基础（<a href="#python-guide">点击查看教程</a>）</li>
+                                <li>理解机器学习核心概念（<a href="#ml-basics">术语表</a>）</li>
+                                <li>实践第一个AI项目（<a href="#quickstart-project">图像分类示例</a>）</li>
+                            </ol>
+                        </div>
+                    </div>
+                     <!-- 学习路径模块 -->
+                    <div class="help-section">
+                        <h3>进阶路径 <span class="icon-arrow">▼</span></h3>
+                        <div class="content">
+                            <div class="pathway-grid">
+                                <div class="pathway-card">
+                                    <h4>计算机视觉</h4>
+                                    <p>OpenCV + TensorFlow</p>
+                                </div>
+                                <div class="pathway-card">
+                                    <h4>自然语言处理</h4>
+                                    <p>PyTorch + Transformers</p>
+                                </div>
+                                <div class="pathway-card">
+                                    <h4>强化学习</h4>
+                                    <p>Gym + Stable Baselines3</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="interactive-diagram">
+                        <!-- 交互式图表将通过JavaScript动态生成 -->
+                          <!-- 交互式图表容器 -->
+    <div class="interactive-diagram">
+        <canvas id="learningPathChart"></canvas>
+    </div>
+
+    <!-- 常见问题模块 -->
+    <div class="help-section">
+        <h3>常见问题 <span class="icon-arrow">▼</span></h3>
+        <div class="content">
+            <div class="faq-item">
+                <h4>如何选择AI框架？</h4>
+                <p>TensorFlow适合生产环境，PyTorch适合研究场景（<a href="#framework-comparison">对比表</a>）</p>
+            </div>
+            <div class="faq-item">
+                <h4>需要什么数学基础？</h4>
+                <p>线性代数、概率统计、微积分（<a href="#math-resources">学习资源</a>）</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 引入图表库并初始化 -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // 学习路径可视化图表 [[5]][[10]]
+    const ctx = document.getElementById('learningPathChart');
+    new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: ['数学基础', '编程能力', '算法理解', '框架掌握', '项目经验'],
+            datasets: [{
+                label: '初级要求',
+                data: [60, 70, 50, 40, 30],
+                fill: true,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgb(54, 162, 235)'
+            },{
+                label: '高级要求',
+                data: [85, 90, 80, 75, 70],
+                fill: true,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgb(255, 99, 132)'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'top' }
+            },
+            scales: {
+                r: {
+                    angleLines: { display: false },
+                    suggestedMin: 0,
+                    suggestedMax: 100
+                }
+            }
+        }
+    });
+
+    // 手风琴交互效果 [[7]][[9]]
+    document.querySelectorAll('.help-section > h3').forEach(header => {
+        header.addEventListener('click', () => {
+            const content = header.nextElementSibling;
+            content.style.display = content.style.display === 'block' ? 'none' : 'block';
+            header.querySelector('.icon-arrow').textContent 
+                = content.style.display === 'block' ? '▼' : '▶';
+        });
+    });
+</script>
+
+<style>
+/* 帮助页面样式优化 [[2]][[3]][[6]] */
+.content-card {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.help-title {
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.help-section {
+    margin-bottom: 1.5rem;
+}
+
+.help-section h3 {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #fff;
+    /* 34495e */
+    transition: color 0.3s;
+}
+
+.help-section h3:hover {
+    color: #e74c3c;
+}
+
+.pathway-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.pathway-card {
+    background: #1F3161;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.pathway-card:hover {
+    transform: translateY(-5px);
+}
+
+.faq-item {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-left: 4px solid #2ecc71;
+    background: #f9f9f9;
+}
+
+.faq-item h4 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+.interactive-diagram {
+    margin: 2rem 0;
+    padding: 1rem;
+    background: #1F3161;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+</style>
+                    </div>
+                </section>
+
+                <!-- <section class="content-card">
+                    <p>得加钱...</p>
+                    <div class="interactive-diagram">
+                    </div>
+                </section> -->
+
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- 悬浮工具栏 -->
+    <!-- <div class="floating-tools">
+        <button class="tool-btn" title="生成思维导图">
+            <svg>思维导图图标</svg>
+        </button>
+        <button class="tool-btn" title="添加笔记">
+            <svg>笔记图标</svg>
+        </button>
+    </div> -->
+
+    <script src="js/modules/cebianlan.js"></script>
+
+
+
+
+<!-- *** AOS *** -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            offset: 100,
+            once: false,
+            mirror: true,
+            anchorPlacement: 'top-bottom',
+            easing: 'cubic-bezier(0.165, 0.84, 0.44, 1)'
+        });
+    </script>
+
+</body>
+</html> 

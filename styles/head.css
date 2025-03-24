@@ -1,0 +1,525 @@
+:root {
+    --primary-color: #2196F3;
+    --secondary-color: #03A9F4;
+    --background-color: #f5f5f5;
+    --text-color: #333;
+    --accent-color: #FF4081;
+}
+
+/* 限制了导航栏和下面文本框的高度 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 背景颜色 */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #1F3161;
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ******************** 导航栏模块 ↓ ************************ */
+
+/* 1.主体 */
+
+/* 排版添加************* */
+/* 与导航栏保持距离 margin-top: 70px;*/
+.main-container {
+    display: grid;
+    /* 三栏布局 */
+    /*  左侧栏 (.side-nav)：250px
+        主内容区 (.content)：自适应 (1fr)
+        右侧栏 (.resources)：300px */
+    /* grid-template-columns: 250px 1fr 300px; */
+
+    gap: 2rem;
+    padding: 2rem;
+    margin-top: 70px; 
+    /* max-width: 1400px; */
+    margin-left: auto;
+    margin-right: auto;
+}
+/* 排版添加 ************* */
+
+
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: rgba(13, 15, 44, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(32, 156, 255, 0.2);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    align-items: center; /* 保持垂直居中 */
+    gap: 1rem; /* 增加子元素间距控制 */
+}
+
+.main-nav::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(90deg, transparent, rgba(32, 156, 255, 0.1) 50%, transparent 100%),
+        linear-gradient(90deg, transparent, rgba(0, 255, 240, 0.05) 30%, transparent 80%);
+    animation: dataStream 8s linear infinite;
+    z-index: -1;
+}
+
+.main-nav::after {
+    content: '10101110010101';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-family: monospace;
+    font-size: 10px;
+    line-height: 8px;
+    white-space: pre;
+    background-image: 
+        linear-gradient(0deg, rgba(10, 12, 44, 0.95) 0%, 
+        rgba(26, 31, 60, 0.95) 100%);
+    -webkit-background-clip: text;
+    color: transparent;
+    opacity: 0.3;
+    animation: matrixRain 20s linear infinite;
+    z-index: -1;
+}
+
+.nav-network {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.nav-network::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 30% 50%, rgba(32, 156, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 70% 50%, rgba(0, 255, 240, 0.1) 0%, transparent 50%);
+    filter: blur(20px);
+    animation: pulseNetwork 4s ease-in-out infinite alternate;
+}
+
+@keyframes dataStream {
+    0% {
+        transform: translateX(-100%) skewX(-45deg);
+    }
+    100% {
+        transform: translateX(100%) skewX(-45deg);
+    }
+}
+
+@keyframes matrixRain {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+@keyframes pulseNetwork {
+    0% {
+        opacity: 0.3;
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 0.6;
+        transform: scale(1.05);
+    }
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-logo h1 {
+    color: #fff;
+    font-size: 1.5rem;
+    text-shadow: 0 0 10px rgba(32, 156, 255, 0.5);
+}
+
+
+/* 2. GitHub图标样式 */
+.github-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    background: transparent;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid transparent;
+}
+
+.github-icon img {
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease;
+    opacity: 0.8;
+}
+
+.github-icon .hover-icon {
+    position: absolute;
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.github-icon:hover {
+    background: rgba(32, 156, 255, 0.2);
+    box-shadow: 0 0 15px rgba(32, 156, 255, 0.3);
+    transform: translateY(-1px);
+    border-color: rgba(32, 156, 255, 0.2);
+}
+
+.github-icon:hover .default-icon {
+    opacity: 0;
+    transform: scale(1.2);
+}
+
+.github-icon:hover .hover-icon {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.github-icon:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 10px rgba(32, 156, 255, 0.2);
+}
+
+/* 3.搜索区域 */
+
+.nav-search input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(32, 156, 255, 0.3);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.nav-search input:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(32, 156, 255, 0.5);
+    box-shadow: 0 0 15px rgba(32, 156, 255, 0.2);
+}
+
+.nav-search input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* 4.搜索按钮 */
+.search-btn {
+    background: linear-gradient(90deg, #2196F3, #00BCD4);
+    border: none;
+    padding: 0.5rem 1.5rem;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(33, 150, 243, 0.3);
+}
+
+.search-btn:hover {
+    box-shadow: 0 0 20px rgba(33, 150, 243, 0.5);
+    transform: translateY(-1px);
+}
+
+.search-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.1)
+    );
+    transform: rotate(45deg);
+    animation: searchBtnShine 3s ease-in-out infinite;
+}
+
+@keyframes searchBtnShine {
+    0% {
+        transform: rotate(45deg) translateY(-100%);
+    }
+    100% {
+        transform: rotate(45deg) translateY(100%);
+    }
+}
+
+/* 5.不清楚是干嘛的 ↓ */
+.content-container {
+    display: flex;
+    margin: 2rem;
+    gap: 2rem;
+}
+
+.sidebar {
+    width: 250px;
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.main-content {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* 6. 导航栏视觉效果 */
+.nav-menu {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-menu a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-menu a:hover {
+    color: #fff;
+    background: rgba(32, 156, 255, 0.1);
+    box-shadow: 0 0 20px rgba(32, 156, 255, 0.2);
+}
+
+.nav-menu a.active {
+    background: rgba(32, 156, 255, 0.2);
+    color: #fff;
+}
+
+.nav-menu a::before {
+    z-index: -1;
+    pointer-events: none; 
+    /* 伪元素::before虽然视觉效果很棒，但默认会拦截点击事件 ,这里出问题的主要原因还是 initializeNavigation();的初始化问题，为了防止日迭代影响功能保留这两行*/
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(32, 156, 255, 0.2), 
+        transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.nav-menu a:hover::before {
+    transform: translateX(100%);
+    
+}
+
+/* 7.不知道干啥的 */
+.carousel-container {
+    margin-top: 1rem;
+}
+
+/* ******************** 导航栏模块 ↑ ************************ */
+
+
+
+/* ******************* 主要内容模块 ↓************************ */
+
+/* 8.修改内容气泡的样式 ↓ */
+
+.content-card:hover {
+    transform: translateY(-5px);
+    background: rgba(31, 49, 97, 0.8);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.content-card {
+    /* background-color: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease; */
+    background: rgba(31, 49, 97, 0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 2rem; /* 增加内间距 */
+    margin-bottom: 2rem; /* 增加模块间距 */
+    transition: all 0.3s ease;
+}
+
+/* .content-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary-color);
+} */
+
+/*line-height: 1.8; 增加行高 */
+/* .content-card p {
+    line-height: 1.8; 
+    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+} */
+
+.content-card:hover {
+    transform: scale(1.05);
+}
+
+/* ********* 多余的 ↓ ********** */
+    /* .content-card {
+        background: rgba(31, 49, 97, 0.6);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 20px;
+        transition: all 0.3s ease;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    } */
+
+    /* .content-card img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+    } */
+
+/* 8.修改内容气泡的样式 ↑ */
+
+
+/* 9.新增标题区域的优化 */
+.hero-section {
+    padding: 4rem 0;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.hero-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* 10.新增侧边栏优化***************** */
+
+    /* .side-nav {
+        position: sticky;
+        top: 100px;
+        height: calc(100vh - 120px);
+        overflow-y: auto;
+        padding-right: 1rem;
+    } */
+
+    /* .resources {
+        position: sticky;
+        top: 100px;
+        height: calc(100vh - 120px);
+        overflow-y: auto;
+    } */
+
+    /* 标题气泡样式 */
+    .resources h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1.5rem;
+        padding: 0.5rem 1rem;
+        background: rgba(32, 156, 255, 0.1); /* 提高透明度到0.3 */
+        color: rgba(255,255,255,0.9); /* 显式定义文字颜色 */
+        border-radius: 6px;
+        
+    }
+/* 新增侧边栏优化***************** */
+
+
+/* 11.新增交互元素优化：************************ */
+
+.interactive-diagram {
+    margin: 2rem 0;        /* 上下2rem（约32px）的外边距 */
+    padding: 1.5rem;       /* 内边距24px */
+    background: rgba(0, 0, 0, 0.2); /* 黑色半透明背景（20%透明度）*/
+    border-radius: 8px;    /* 圆角半径 */
+    min-height: 300px;     /* 最小高度保障占位 */
+}
+
+.floating-tools {
+    position: fixed;       /* 固定定位 */
+    right: 2rem;           /* 距离右侧32px */
+    bottom: 2rem;          /* 距离底部32px */
+    display: flex;         /* 弹性布局 */
+    gap: 1rem;             /* 子元素间距16px */
+    background: rgba(13, 15, 44, 0.9); /* 深蓝色半透明背景 */
+    padding: 1rem;         /* 内边距16px */
+    border-radius: 50px;   /* 胶囊状圆角 */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* 投影效果 */
+}
+
+/* .interactive-diagram {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    min-height: 300px;
+}
+
+.floating-tools {
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+    display: flex;
+    gap: 1rem;
+    background: rgba(13, 15, 44, 0.9);
+    padding: 1rem;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+} */
+/* 11.新增交互元素优化：************************ */

@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "routes": [
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/ai-basics", "dest": "/ai-basics.html" },
+    { "src": "/images/(.*)", "dest": "/images/$1" },
+    { "src": "/styles/(.*)", "dest": "/styles/$1" },
+    { "src": "/js/(.*)", "dest": "/js/$1" },
+    { "src": "/(.*)", "dest": "/$1" }
+  ],
+  "builds": [
+    { "src": "**/*.html", "use": "@vercel/static" },
+    { "src": "**/*.css", "use": "@vercel/static" },
+    { "src": "**/*.js", "use": "@vercel/static" },
+    { "src": "images/**", "use": "@vercel/static" }
+  ]
+} 
