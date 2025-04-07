@@ -23,11 +23,48 @@
     <!-- 导航栏 css -->
     <link rel="stylesheet" href="./styles/head.css">
     <!-- <link rel="stylesheet" href="./styles/main.css"> -->
-     <!-- <link rel="stylesheet" href="./styles/test.css" -->
-
+    <!-- <link rel="stylesheet" href="./styles/test.css" -->
+    
+    <!-- 添加星星背景样式 -->
+    <link rel="stylesheet" href="./styles/stars.css">
+    
+    <!-- 添加部分main.css的样式，确保背景一致 -->
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* 确保星星容器样式正确 */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
+        
+        .stars-container.visible {
+            opacity: 1;
+        }
+    </style>
 </head>
 
 <body>
+    <!-- 添加星星背景容器 -->
+    <div id="starsContainer" class="stars-container"></div>
+
     <!-- 全局导航 -->
     <nav id="homehelp" class="main-nav">
         <div class="nav-network"></div>
@@ -254,6 +291,8 @@
                     </a>
                 </li> -->
 
+             <!-- 在侧边栏的 chapter-list 之后添加 -->
+             <!-- 侧边栏召唤AI客服测试 -->
                 <div class="ai-service-container">
                     <a href="#" id="summonAIService" class="ai-service-link nav-top-parent">
                         <svg class="nav-item-icon" viewBox="0 0 24 24">
@@ -264,34 +303,114 @@
                 </div>
 
             </ul>
-            <!-- 在侧边栏的 chapter-list 之后添加 -->
-             <!-- 侧边栏召唤AI客服测试 -->
-                    <div class="ai-service-container">
-                        <a href="#" id="summonAIService" class="ai-service-link nav-parent">
-                            <svg class="nav-item-icon" viewBox="0 0 24 24">
-                                <path fill="currentColor" d="M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 12,2M18,13H13V18H11V13H6V11H11V6H13V11H18V13Z"/>
-                            </svg>
-                            召唤AI客服
-                        </a>
-                    </div>
+
         </div>
     </nav>
 
 
 <!-- ************************主要内容模块************************ -->
+ 
         <main class="content">
+            
             <!-- 标题区 -->
             <div class="hero-section" id="intro">
                 <h1>AI+ 结构化学习平台-帮助</h1>
-                <p class="subtitle">雖然給不到你什麼帮助</p>
+                <p class="subtitle">雖然給不到你什麼幫助</p>
                 <div class="particle-background"></div>
             </div>
 
      <!-- 模块一 -->
             <aside class="resources">
                 <!-- <section> -->
-                <h3>lalala，欢迎来到AI的世界！</h3>
+                <h3>lalala，歡迎來到AI的世界！</h3>
             </aside>
+
+            
+<!-- =========================新手入门模块========================= -->
+<!-- 在beginner-guide部分内部添加 -->
+<section class="beginner-guide">
+    <div class="guide-header">
+        <svg class="guide-icon" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12,3L1,9L12,15L21,10.09V17H23V9M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18Z"/>
+        </svg>
+        <h3 class="guide-title">新手入门指南</h3>
+    </div>
+    <ul class="guide-steps">
+        <li class="guide-step">
+            <p class="guide-step-content">注册账号并完成基础设置</p>
+        </li>
+        <li class="guide-step">
+            <p class="guide-step-content">浏览模块化学习区域，选择适合的AI学习路径</p>
+        </li>
+        <li class="guide-step">
+            <p class="guide-step-content">尝试使用AI工具矩阵中的基础工具</p>
+        </li>
+        <li class="guide-step">
+            <p class="guide-step-content">完成第一个AI小项目</p>
+        </li>
+    </ul>
+    <a href="#" class="guide-action">开始学习之旅</a>
+
+        <!-- ==============星星测试==================== -->
+        <!-- 在body结束前添加 -->
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('starsContainer');
+            const starsCount = 88; // 增加星星数量以覆盖更大区域
+            
+            // 清空容器，确保初始状态为空
+            container.innerHTML = '';
+            
+            // 设置容器样式以覆盖除顶部和侧边导航栏以外的全屏
+            container.style.position = 'fixed';
+            container.style.top = '60px'; // 顶部导航栏高度
+            container.style.left = '280px'; // 侧边导航栏宽度
+            container.style.right = '0';
+            container.style.bottom = '0';
+            container.style.width = 'auto';
+            container.style.height = 'auto';
+            container.style.zIndex = '1'; // 确保在内容下方但可见
+        
+            // 创建星星元素
+            for (let i = 0; i < starsCount; i++) {
+                const star = document.createElement('div');
+                
+                // 随机选择星星类型，增加多样性
+                const rand = Math.random();
+                const size = rand > 0.9 ? 'stars5' : 
+                            (rand > 0.75 ? 'stars4' : 
+                            (rand > 0.5 ? 'stars3' : 
+                            (rand > 0.25 ? 'stars2' : 'stars')));
+                
+                // 随机位置
+                star.className = size;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                // 随机动画延迟
+                star.style.animationDelay = `${Math.random() * 10}s`;
+                
+                // 为较大星星设置漂移方向
+                if (size === 'stars3' || size === 'stars4' || size === 'stars5') {
+                    const driftX = (Math.random() - 0.5) * 20; // -10px到10px
+                    const driftY = (Math.random() - 0.5) * 20; // -10px到10px
+                    star.style.setProperty('--drift-x', `${driftX}px`);
+                    star.style.setProperty('--drift-y', `${driftY}px`);
+                }
+                
+                container.appendChild(star);
+            }
+            
+            // 延迟显示星星，避免突兀
+            setTimeout(() => {
+                container.classList.add('visible');
+            }, 800);
+        });
+
+    </script>
+</section>
+
+
 
             <!-- 内容区块 -->
             <div class="content-sections">
@@ -382,6 +501,7 @@
         </div>
     </div>
 </section>
+
 
 <!-- 引入图表库并初始化 -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -546,5 +666,10 @@
         });
     </script>
 
+
+
+    <!-- 添加星星背景脚本 -->
+    <script src="./js/modules/stars.js"></script>
 </body>
-</html> 
+</html>
+

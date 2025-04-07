@@ -1,0 +1,121 @@
+/* =========================星星容器样式优化 - 调整为适应整个页面==========================*/
+/* 添加stars背景效果 :
+* 1.添加stars的 link 链接
+* 2.内嵌css中，添加部分main.css的样式，确保背景一致
+* 3.body 中创建stars容器: 加stars-container类
+* 4.添加stars的 js 脚本
+*/
+.stars-container {
+    position: fixed;
+    top: 60px; /* 顶部导航栏高度 */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: calc(100vh - 60px);
+    overflow: visible;
+    pointer-events: none; /* 确保不影响交互 */
+    z-index: -1; /* 确保在所有内容元素下方 */
+    opacity: 0; /* 初始状态不显示 */
+    transition: opacity 1.5s ease;
+}
+
+.stars-container.visible {
+    opacity: 0.9; /* 可见状态时的透明度 */
+}
+
+/* 渐变背景效果 - 从中心向四周发散 */
+.stars-container::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(41, 61, 102, 0.4) 0%,
+        rgba(26, 42, 76, 0.2) 40%,
+        rgba(10, 25, 47, 0) 100%
+    );
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* 星星样式 */
+.stars, .stars2, .stars3, .stars4, .stars5 {
+    position: absolute;
+    border-radius: 50%;
+    background: #fff;
+    filter: blur(0.5px);
+}
+
+.stars {
+    width: 1px;
+    height: 1px;
+    box-shadow: 0 0 3px 1px rgba(255, 255, 255, 0.7);
+    animation: twinkle 4s ease-in-out infinite;
+}
+
+.stars2 {
+    width: 1.5px;
+    height: 1.5px;
+    box-shadow: 0 0 4px 1px rgba(255, 255, 255, 0.8);
+    animation: twinkle 5s ease-in-out infinite;
+}
+
+.stars3 {
+    width: 2px;
+    height: 2px;
+    box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.9);
+    animation: twinkle 6s ease-in-out infinite;
+}
+
+.stars4 {
+    width: 2.5px;
+    height: 2.5px;
+    box-shadow: 0 0 6px 2px rgba(255, 255, 255, 1);
+    animation: twinkle 7s ease-in-out infinite;
+}
+
+.stars5 {
+    width: 3px;
+    height: 3px;
+    box-shadow: 0 0 8px 2px rgba(100, 255, 218, 0.9);
+    animation: twinkle 8s ease-in-out infinite;
+    filter: blur(0.7px);
+}
+
+/* 星星闪烁动画 */
+@keyframes twinkle {
+    0% {
+        opacity: 0.2;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    100% {
+        opacity: 0.2;
+        transform: scale(0.8);
+    }
+}
+
+/* 添加星星漂移动画 */
+@keyframes drift {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+    50% {
+        transform: translateX(var(--drift-x, 10px)) translateY(var(--drift-y, 5px));
+    }
+    100% {
+        transform: translateX(0) translateY(0);
+    }
+}
+
+/* 为部分星星添加漂移效果 */
+.stars3, .stars4, .stars5 {
+    animation: twinkle 6s ease-in-out infinite, drift 30s linear infinite;
+}

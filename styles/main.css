@@ -1,9 +1,18 @@
+/* 顶部导航栏区域、AI客服弹窗、AI模块化学习、Tools矩阵、页脚等样式 */
 :root {
     --primary-color: #2196F3;
     --secondary-color: #03A9F4;
     --background-color: #f5f5f5;
     --text-color: #333;
     --accent-color: #FF4081;
+    /* copy自cebianlan.css的原生星空背景颜色变量 */
+    --bg-primary: #0A192F;
+    --bg-secondary: #1A1A2E;
+    --accent-blue: #00F3FF;
+    --accent-green: #7FFF00;
+    --accent-pink: #FF10F0;
+    --text-primary: #CCD6F6;
+    --text-secondary: rgba(204, 214, 246, 0.8);
 }
 
 * {
@@ -12,10 +21,20 @@
     box-sizing: border-box;
 }
 
-body {
+/* 素颜背景 */
+/* body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #1F3161;
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+} */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* 替换背景色为cebianlan.css中的深色渐变背景 */
+    background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
     color: #fff;
     min-height: 100vh;
     overflow-x: hidden;
@@ -23,9 +42,79 @@ body {
 
 /* 删除轮播图顶部间距 */
 #carousel-section {
-    margin-top: -70px;
+    /* margin-top: -70; */
+    margin-top: -160px;
     padding-top: 0;
+    position: relative;
+    z-index: 2; /* 确保轮播图在适当的层级 */
+    background: transparent; /* 确保背景透明 */
 }
+
+/* 为顶部区域添加特殊的渐变过渡效果 */
+/* bottom: -50px;  向下延伸，创造渐变过渡 */
+/* #carousel-section::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -50px; 
+    height: 100px;
+    background: linear-gradient(to bottom, 
+                rgba(10, 25, 47, 0), 
+                rgba(10, 25, 47, 0.1));
+    z-index: 1;
+    pointer-events: none;
+} */
+
+/* 调整h3.section-title的背景，使其与轮播图和聊天区域融合 */
+h3.section-title {
+    position: relative;
+    z-index: 2;
+    background: transparent;
+    padding: 20px 0;
+    margin: 0;
+}
+
+/* 为h3.section-title添加微妙的背景效果 */
+h3.section-title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(31, 49, 97, 0.3) 0%,
+        transparent 70%
+    );
+    z-index: -1;
+    pointer-events: none;
+}
+
+
+/* =============== 为解决AI聊天跳转准确性添加 ↓ ================ */
+html {
+    scroll-padding-top: 70px; /* 根据导航栏实际高度调整 */
+    scroll-behavior: smooth; /* 添加平滑滚动效果 */
+}
+/* 统一模块区域之间的距离及背景效果 */
+#carousel-section
+,
+#chat-section
+/* ,
+#modules-section */
+/* ,
+#content-section  */
+    {
+        position: relative;
+        background: transparent;
+        padding: 200px 0;
+        scroll-margin-top: -120px; /* 根据导航栏实际高度调整 */
+
+    }
+/* =============== 为解决AI聊天跳转准确性添加 ↑ ===============  */
+
 
 /* 科技感标题样式 */
 .section-title {
@@ -37,6 +126,9 @@ body {
     text-transform: uppercase;
     letter-spacing: 2px;
     text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.2);
+    position: relative;
+    z-index: 2; /* 确保文字在适当的层级 */
+    background: transparent; /* 确保背景透明 */
 }
 
 /* 科技感标题样式 左对齐 */
@@ -78,21 +170,34 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: #1F3161;
+    /* background: #1F3161; */
+    /* 增加透明度，让星星背景更明显 */
+    background: rgba(31, 49, 97, 0.5); /* 从0.7降低到0.5，增加透明度 , 改变原不透明的 #1F3161 */
     border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);/* 0.1->0.2 略微增加边框亮度 */
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.25);/* 0.15->0.25 增加阴影效果 */
+
+    backdrop-filter: blur(6px); /* 添加模糊效果，增强玻璃感 */
     z-index: -1;
 }
 
-/* 模块卡片样式 */
+/*===================== 为 模块化学习 和 工具矩阵 区域添加特殊样式 =======================*/
+#modules-section .section-container::before,
+#content-section .section-container::before {
+    background: rgba(31, 49, 97, 0.2); /* 进一步降低模块化学习和工具矩阵区域的不透明度 */
+    backdrop-filter: blur(5px); /* 调整模糊效果 */
+    border: 1px solid rgba(255, 255, 255, 0.25); /* 更亮的边框 */
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.3); /* 增强阴影 */
+}
+
+/* =========================== 模块卡片样式 ↓ ============================ */
 .module-card {
     position: relative;
-    background: transparent;
-    border-radius: 15px;
+    background: rgba(10, 25, 47, 0.15);
+    border-radius: 18px; /* 增加圆角 */
     padding: 25px;
-    transition: all 0.4s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1); /* 更平滑的过渡曲线 */
+    border: 1px solid rgba(255, 255, 255, 0.12);
     overflow: hidden;
     z-index: 1;
     text-decoration: none !important; /* 去除下划线 */
@@ -100,6 +205,9 @@ body {
     color: inherit;
     height: 100%; /* 关键：填充网格高度 */
     box-sizing: border-box; /* 防止padding溢出 */
+    transform: translateY(0);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .module-card::before {
@@ -109,64 +217,145 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.05);
+    background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.05) 0%, 
+                rgba(31, 49, 97, 0.1) 100%);
     backdrop-filter: blur(10px);
-    border-radius: 15px;
+    border-radius: 18px; /* 与卡片保持一致 */
     z-index: -1;
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* 添加星星点缀效果 */
+.module-card::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    top: 15%;
+    right: 10%;
+    box-shadow: 
+        0 0 8px 2px rgba(0, 243, 255, 0.4),
+        -30px 20px 3px rgba(255, 255, 255, 0.2),
+        30px -20px 2px rgba(255, 255, 255, 0.1),
+        -15px -15px 2px rgba(127, 255, 0, 0.1);
+    opacity: 0.5;
+    transition: opacity 0.5s ease;
 }
 
 .module-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.25);
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.25),
+        0 0 20px rgba(0, 243, 255, 0.15);
 }
 
 .module-card:hover::before {
-    background: rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, 
+                rgba(0, 243, 255, 0.05) 0%, 
+                rgba(31, 49, 97, 0.2) 100%);
 }
+
+.module-card:hover::after {
+    opacity: 1;
+}
+
+/* ==================================================== */
 
 .module-card h3 {
     color: #fff;
     font-size: 1.4rem;
     margin: 15px 0;
     font-family: 'Orbitron', sans-serif;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
+    transition: all 0.3s ease;
+} 
+
+.module-card:hover h3 {
+    text-shadow: 0 0 12px rgba(0, 243, 255, 0.5);
 }
 
 .module-card p {
     color: rgba(255, 255, 255, 0.8);
     opacity: 0.8;
+    transition: all 0.3s ease;
 }
 
-.module-card .module-icon {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #fff;
-    opacity: 0.9;
-    transition: all 0.4s ease;
-}
-
-.module-card:hover .module-icon {
-    transform: scale(1.1) rotate(5deg);
+.module-card:hover p {
+    color: rgba(255, 255, 255, 1);
     opacity: 1;
 }
 
+.module-card .module-icon {
+    font-size: 2rem; /* 从2.5rem减小到2rem */
+    margin-bottom: 15px; /* 从20px减小到15px */
+    color: rgba(255, 255, 255, 0.9);
+    opacity: 0.9;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: drop-shadow(0 0 8px rgba(0, 243, 255, 0.3));
+}
+
+.module-card .module-icon svg {
+    width: 88px; /* 添加明确的宽度 */
+    height: 88px; /* 添加明确的高度 */
+}
+
+.module-card:hover .module-icon {
+    transform: scale(1.15) rotate(5deg);
+    opacity: 1;
+    color: #fff;
+    filter: drop-shadow(0 0 12px rgba(0, 243, 255, 0.5));
+}
+
+/* 模块网格布局 */
+.module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* 特色模块样式 */
+.module-card.featured {
+    grid-row: span 1;
+    grid-column: span 1;
+}
+
+/* =========================== 模块卡片样式 ↑ ============================ */
+
 /* 内容区域高度控制 */
 .module-content {
+    position: relative;
+    z-index: 2; /* 确保内容在最上层 */
+    background: transparent !important; /* 移除黑色背景，改为透明 */
+    padding: 1.5rem;
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end;
+    /* 添加微妙的渐变，确保文字可读性 */
+    background: linear-gradient(to top, 
+        rgba(10, 25, 47, 0.5) 0%, 
+        rgba(10, 25, 47, 0.2) 40%,
+        rgba(10, 25, 47, 0) 100%
+    ) !important;
+
+    /* 调整卡片内部间距，使卡片更紧凑 */
+    padding: 1rem !important; /* 减小内边距 */
+
 }
 
 /* AI+应用区域样式 */
-.category-list h3 {
+/* .category-list h3 {
     font-family: 'Orbitron', sans-serif;
     color: #fff;
     text-align: center;
     font-size: 1.5rem;
     margin-bottom: 30px;
-}
+} */
 
 .content-grid {
     display: grid;
@@ -185,14 +374,19 @@ body {
     position: relative;
     padding: 30px 0;  /* 减小padding */
     background: transparent;
+    margin: 0; /* 移除可能的外边距 */
+    /*height: auto;*/ /* 允许内容撑开高度 */
+    /*overflow: visible;*/ /* 允许内容溢出 */
+    /*transition: all 0.4s ease;*/ /* 过渡效果 */
 }
 
+/* 移除多余的背景和过渡效果 */
+.section-block::after,
 .section-block::before {
-    display: none;  /* 移除过渡效果 */
+    display: none;
 }
 
-
-
+/* ============================ 顶部导航栏样式 ↓ ============================= */
 .main-nav {
     position: fixed;
     top: 0;
@@ -378,6 +572,98 @@ body {
 
 /* 搜索按钮 */
 .search-btn {
+    /* 调整默认状态背景色，使其更加明显 */
+    background: linear-gradient(90deg, rgba(0, 243, 255, 0.3), rgba(31, 49, 97, 0.7));
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 0.5rem 1.5rem;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    /* 增强默认状态的发光效果 */
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.2),
+                inset 0 0 5px rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.search-btn:hover {
+    /* 悬停状态与默认状态协调 */
+    background: linear-gradient(90deg, rgba(0, 243, 255, 0.5), rgba(31, 49, 97, 0.8));
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.3),
+                0 0 30px rgba(0, 243, 255, 0.2),
+                inset 0 0 10px rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 0 0 5px rgba(0, 243, 255, 0.7);
+}
+
+.search-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+}
+
+/* 添加按钮内部光效 */
+.search-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: left 0.7s ease;
+    z-index: 1;
+}
+
+.search-btn:hover::before {
+    left: 100%;
+}
+
+/* 添加星星点缀效果 */
+.search-btn::after {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: rgba(0, 243, 255, 0.8);
+    box-shadow: 
+        0 0 4px 2px rgba(0, 243, 255, 0.3),
+        10px 10px 2px rgba(0, 243, 255, 0.1),
+        -10px -5px 2px rgba(0, 243, 255, 0.1),
+        15px -10px 2px rgba(0, 243, 255, 0.1);
+    top: 50%;
+    left: 10%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.search-btn:hover::after {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+}
+
+@keyframes searchBtnShine {
+    0% {
+        transform: rotate(45deg) translateY(-100%);
+    }
+    100% {
+        transform: rotate(45deg) translateY(100%);
+    }
+}
+/* .search-btn {
     background: linear-gradient(90deg, #2196F3, #00BCD4);
     border: none;
     padding: 0.5rem 1.5rem;
@@ -417,7 +703,7 @@ body {
     100% {
         transform: rotate(45deg) translateY(100%);
     }
-}
+} */
 
 .content-container {
     display: flex;
@@ -432,17 +718,21 @@ body {
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
+/* ============================ 顶部导航栏样式 ↑ ============================= */
 
+
+/* 主内容区域样式 */
 .main-content {
     flex: 1;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(8px);
+    background: rgba(31, 49, 97, 0.3); /* 降低不透明度，从0.1降到0.3 */
+    backdrop-filter: blur(5px); /* 增加模糊效果 */
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* 增强阴影效果 */
+    border: 1px solid rgba(255, 255, 255, 0.15); /* 添加边框 */
 }
 
-/* 导航栏模式 */
+/* =============================== 导航栏模式 =========================== */
 .nav-menu {
     display: flex;
     gap: 2rem;
@@ -497,7 +787,10 @@ body {
     margin-top: 1rem;
 }
 
-/* 页脚基础样式 */
+/* =============================== 导航栏模式 ↑ =========================== */
+
+
+/* ============================== 页脚基础样式 ↓============================= */
 .site-footer {
     background: linear-gradient(to bottom, #0F172A, #1E293B);
     padding: 4rem 0 2rem;
@@ -631,7 +924,10 @@ body {
     filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.5));
 }
 
-/* AI客服弹窗样式 */
+/* ============================== 页脚基础样式 ↑ ============================= */
+
+
+/* ============================= AI客服弹窗样式 ↓ ============================ */
 .ai-service-popup {
     position: fixed;
     right: 2rem;
@@ -687,6 +983,8 @@ body {
     color: rgba(66,66,66, 0.8);
 }
 
+/* ============================= AI客服弹窗样式 ↑ ============================ */
+
 /* 响应式设计 */
 @media (max-width: 1024px) {
     .footer-container {
@@ -724,9 +1022,12 @@ body {
     text-shadow: 0 0 10px rgba(32, 156, 255, 0.5);
 }
 
-/* 修改聊天容器背景 */
+/* 修改、统一 聊天容器背景 */
 .chat-container {
     background: transparent;
+
+    /* position: relative;
+    z-index: 2; */
 }
 
 /* 统一页脚链接样式 */
@@ -782,23 +1083,115 @@ body {
     margin: 10px 0;
 }
 
-/* 工具矩阵左侧按钮颜色 */
+/* =============== tools 工具矩阵区域左侧导航栏样式 ↓ =============== */
+/* 优化类别标题样式 */
+.category-list h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: #ffffff; /* 改为纯白色 */
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7); /* 增强白色发光效果 */
+    letter-spacing: 1px;
+}
+
+/* 工具矩阵左侧按钮颜色 - 增强默认状态可见度 */
 .category-list a {
     display: block;
     text-decoration: none;
-    color: white;
-    background-color: #4682B4; /* 备选：222850、8B5CF6、4682B4*/
-    padding: 10px;
+    color: #ffffff; /* 改为纯白色文字 */
+    background-color: rgba(255, 255, 255, 0.01);
+    padding: 12px 15px;
     text-align: center;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    /* 圆角 */
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.25); /* 增加导航栏边框亮度 */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 8px rgba(255, 255, 255, 0.2); /* 添加白色发光效果 */
+    position: relative;
+    overflow: hidden;
+    font-weight: 500; /* 增加字体粗细 */
+    letter-spacing: 0.5px; /* 增加字间距 */
 }
 
 .category-list a:hover {
-    background-color: #685E8B; /* 深蓝色 */
-    transform: scale(1.05);
+    background-color: rgba(255, 255, 255, 0.1); /* 使用白色背景，增加透明度 */
+    transform: translateY(-3px);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.6); /* 增加边框亮度 */
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.25), 
+                0 0 15px rgba(255, 255, 255, 0.25); /* 双层白色阴影效果 */
 }
+
+/* 修复发光效果 - 使用白色系效果 */
+.category-list a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%; /* 开始位置在元素外 */
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    opacity: 0;
+    transition: left 0.6s ease, opacity 0.3s ease;
+    z-index: 1;
+}
+
+.category-list a:hover::before {
+    left: 100%; /* 结束位置也在元素外 */
+    opacity: 1;
+}
+
+/* 光线扫过de简洁的边框发光效果 */
+.category-list a::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0);
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+    transition: all 0.4s ease;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.category-list a:hover::after {
+    /* border-color: rgba(255, 255, 255, 0.6); */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+/* 添加激活状态样式，与星空背景协调 */
+.category-list a.active {
+    background: rgba(255, 255, 255, 0.15);
+    border-left: 3px solid #ffffff;
+    color: #ffffff;
+}
+/* .category-list a {
+    display: block;
+    text-decoration: none;
+    color: white; */
+            /* background-color: rgba(70, 130, 180, 0.2); */
+            /* 备选：222850、8B5CF6、4682B4*/
+    /* padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.2);
+}
+
+.category-list a:hover {
+    background-color: #685E8B; 
+    transform: scale(1.05);
+} */
 
 .main-content {
     flex: 1;
@@ -811,16 +1204,17 @@ body {
     gap: 20px;
 }
 
+/* ====================== 工具矩阵模块样式 ↓ ======================== */
 .content-card {
     /* 强制覆盖背景色 */
-    background-color: rgba(139,92,246,0.2) !important; /* 纯色1F3161(31, 49, 97, 0.6)测试 [[3]][[6]] */
-    /* 其他属性保持不变 */
+    background-color: rgba(139,92,246,0.01) !important; /* 纯色1F3161(31, 49, 97, 0.6)测试 [[3]][[6]] */
     border-radius: 8px; 
     padding: 15px; 
     transition: transform 0.3s ease, background 0.3s ease;
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);/* 8->5:增加模糊效果 */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0 2px 10px rgba(0,0,0,0.1); */
     cursor: pointer;
     text-align: center;
     display: flex;
@@ -828,10 +1222,30 @@ body {
     justify-content: center;
 }
 
+/* 添加卡片标题样式 */
+.card-title {
+    color: #ffffff;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3); /* 默认状态下的文字阴影 */
+    transition: all 0.3s ease;
+}
+
+/* 卡片标题悬停效果 */
+.content-card:hover .card-title {
+    color: #ffffff;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.6), 
+                 0 0 20px rgba(255, 255, 255, 0.4); /* 悬停时增强文字阴影效果 */
+    transform: translateY(-2px);
+}
+
 .content-card:hover {
     transform: scale(1.05) translateY(-5px); /* 合并两次的transform效果 */
-    background: rgba(31, 49, 97, 0.8)!important;
-    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(31, 49, 97, 0.3)!important;/* 0.8->0.6 && !important 悬停时稍微增加不透明度*/
+    border-color: rgba(255, 255, 255, 0.3); /* 增加边框亮度 */
+    box-shadow: 0 8px 20px rgba(31, 38, 135, 0.3); /* 增强阴影 */
 }
 
 .content-card img {
@@ -840,19 +1254,22 @@ body {
     border-radius: 8px;
 }
 
-/* 卡片内的超链接样式 */
+/* 卡片内的超链接样式-初版 */
 .content-card a {
-    color: #D8D8DA; /* 默认文字颜色设为白色 685E8B */
-    text-decoration: none; /* 移除下划线  */
-    transition: color 0.3s ease; /* 添加颜色渐变效果 */
+    /* color: #D8D8DA;  */
+    /* 默认文字颜色设为白色 685E8B */
+    text-decoration: none; 
+    /* 移除下划线  */
+    /* transition: color 0.3s ease; */
+     /* 添加颜色渐变效果 */
 }
 
-/* 悬停效果 */
-.content-card a:hover {
-    color: #8B5CF6; /* 悬停颜色改为紫色 */
+/* 旧版卡片文字悬停效果 */
+/* .content-card a:hover {
+    color: #8B5CF6;  */
     /* 可选：悬停显示下划线 */
     /* text-decoration: underline;  */
-}
+/* } */
 
 .pagination {
     margin-top: 20px;
@@ -873,7 +1290,7 @@ body {
 }
 
 .pagination button:hover {
-    background-color: #8B5CF6; /* 深蓝色 */
+    background-color: rgba(255, 255, 255, 0.2);  /* 深蓝色 #8B5CF6;*/
     transform: scale(1.05);
 }
 
@@ -885,21 +1302,20 @@ body {
     gap: 15px; 
 } */
 
-/* 移除多余的背景和过渡效果 */
-.section-block::after,
-.section-block::before {
-    display: none;
-}
+/* ====================== 工具矩阵模块样式 ↑ ======================== */
 
 
 /* ================================== AI模块化学习区域样式 =============================== */
 .ai-modules {
-    background: #1F3161 !important;/* 强制 .ai-modules 覆盖背景，确保 .ai-modules 的背景色优先级高于父容器 .section-container */
+    /* 强制 .ai-modules 覆盖背景，确保 .ai-modules 的背景色优先级高于父容器 .section-container */
+    /* background: #1F3161 !important; */
+    background: transparent !important; /* 上方是初始代码，这里将ai-modules 调整为完全透明 */
     position: relative;
     border-radius: 20px;
     padding: 30px;
     margin: 20px 0;
-    overflow: hidden;
+    /* overflow: hidden; */
+    overflow: visible; /* 从 hidden 改为 visible */
 }
 
 .ai-modules::before {
@@ -911,13 +1327,17 @@ body {
     bottom: 0;
     background: linear-gradient(
         135deg,
-        rgba(255, 255, 255, 0.1) 0%,
-        rgba(255, 255, 255, 0.05) 100%
+        /* rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.05) 100% */
+        rgba(31, 49, 97, 0.2) 0%, /* 增加模块化学习和工具矩阵区域气泡的透明度 */
+        rgba(10, 25, 47, 0.3) 100% /* 增加模块化学习和工具矩阵区域气泡的透明度 */
     );
     border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
-    z-index: 0;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+    backdrop-filter: blur(5px); /* 添加模糊效果 */
+    z-index: -1; /* 确保背景在内容之下 */
+    pointer-events: none; /* 确保不会阻止点击事件 */
 }
 
 .module-grid {
@@ -926,4 +1346,130 @@ body {
     gap: 15px; /* 减小模块间距 */
     position: relative;
     z-index: 1;
+}
+
+/* ================= 星星背景效果 ================= */
+/* 星星容器样式优化 - 调整为适应整个页面 */
+.stars-container {
+    position: fixed;
+    top: 60px; /* 顶部导航栏高度 */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: calc(100vh - 60px);
+    overflow: visible;
+    pointer-events: none; /* 确保不影响交互 */
+    z-index: -1; /* 确保在所有内容元素下方 */
+    opacity: 0; /* 初始状态不显示 */
+    transition: opacity 1.5s ease;
+}
+
+.stars-container.visible {
+    opacity: 1; /* 提高可见状态时的透明度 */
+}
+
+/* 渐变背景效果 - 从中心向四周发散 */
+.stars-container::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(41, 61, 102, 0.4) 0%,
+        rgba(26, 42, 76, 0.2) 40%,
+        rgba(10, 25, 47, 0) 100%
+    );
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* 星星样式优化 - 增加多种尺寸和亮度 */
+.stars, .stars2, .stars3, .stars4, .stars5 {
+    position: absolute;
+    border-radius: 50%;
+    background: #fff;
+    filter: blur(0.5px);
+}
+
+.stars {
+    width: 1px;
+    height: 1px;
+    box-shadow: 0 0 3px 1px rgba(255, 255, 255, 0.7);
+    animation: twinkle 4s ease-in-out infinite;
+}
+
+.stars2 {
+    width: 1.5px;
+    height: 1.5px;
+    box-shadow: 0 0 4px 1px rgba(255, 255, 255, 0.8);
+    animation: twinkle 5s ease-in-out infinite;
+}
+
+.stars3 {
+    width: 2px;
+    height: 2px;
+    box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.9);
+    animation: twinkle 6s ease-in-out infinite;
+}
+
+.stars4 {
+    width: 2.5px;
+    height: 2.5px;
+    box-shadow: 0 0 6px 2px rgba(255, 255, 255, 1);
+    animation: twinkle 7s ease-in-out infinite;
+}
+
+.stars5 {
+    width: 3px;
+    height: 3px;
+    box-shadow: 0 0 8px 2px rgba(100, 255, 218, 0.9);
+    animation: twinkle 8s ease-in-out infinite;
+    filter: blur(0.7px);
+}
+
+/* 星星闪烁动画优化 */
+@keyframes twinkle {
+    0% {
+        opacity: 0.2;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    100% {
+        opacity: 0.2;
+        transform: scale(0.8);
+    }
+}
+
+/* 添加星星漂移动画 */
+@keyframes drift {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+    50% {
+        transform: translateX(var(--drift-x, 10px)) translateY(var(--drift-y, 5px));
+    }
+    100% {
+        transform: translateX(0) translateY(0);
+    }
+}
+
+/* 为部分星星添加漂移效果 */
+.stars3, .stars4, .stars5 {
+    animation: twinkle 6s ease-in-out infinite, drift 30s linear infinite;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .stars-container {
+        left: 0; /* 在移动设备上侧边栏不固定 */
+        top: 0; /* 移动设备上导航栏可能不固定 */
+        height: 100vh;
+    }
 }

@@ -13,6 +13,7 @@
 body {
     margin: 0;
     padding: 0;
+    /* cebianlan.css 中的深色渐变背景 */
     background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
     color: var(--text-primary);
     font-family: 'Inter', sans-serif;
@@ -25,7 +26,9 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(10, 25, 47, 0.8);
+    /* background: rgba(10, 25, 47, 0.8); */
+    /* 调整导航栏背景透明度，与main.css保持一致 */
+    background: rgba(13, 15, 44, 0.95);
     backdrop-filter: blur(10px);
     z-index: 1000;
 }
@@ -44,14 +47,30 @@ body {
     position: fixed;
     left: 0;
     top: 60px;
-    background: rgba(26, 26, 46, 0.8);
+    background: rgba(26, 26, 46, 0.7);
     backdrop-filter: blur(10px);
-    border-right: 1px solid rgba(0, 243, 255, 0.1);
+    /* border-right: 1px solid rgba(0, 243, 255, 0.1); */
+    /* 修改边框样式，使其更加显眼 */
+    border-right: 1px solid rgba(0, 243, 255, 0.3);
+    /* 添加顶部和底部边框，暂时用不到 */
+    /* border-top: 1px solid rgba(0, 243, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 243, 255, 0.2); */
+
+    /* 添加阴影效果增强立体感 */
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.1), inset 0 0 10px rgba(0, 243, 255, 0.05);
+    
     overflow-y: auto;
     transition: all 0.3s ease;
     padding: 2rem 0;
     /*     transition: all var(--transition-base);？ */
 }
+
+/* 添加侧边栏悬停效果 */
+.side-nav:hover {
+    border-right: 1px solid rgba(0, 243, 255, 0.5);
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.15), inset 0 0 15px rgba(0, 243, 255, 0.08);
+}
+
 
 /* 侧边栏目录展开后宽度 */
 /* .side-nav.expanded {
@@ -234,18 +253,68 @@ body {
 } */
 /* =========================侧边栏添加默认状态的霓虹灯特效光效========================== */
 
+/* =========================      导航项样式增强 - 目录悬停效果      ↓   =========================== */
+.nav-parent, .nav-sub-parent {
+    position: relative;
+    padding: 10px 15px;
+    margin: 5px 0;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    /* 添加微妙的边框 */
+    border: 1px solid rgba(0, 243, 255, 0.05);
+}
+
+.nav-parent:hover, .nav-sub-parent:hover {
+    background: rgba(0, 243, 255, 0.1);
+    border: 1px solid rgba(0, 243, 255, 0.2);
+    /* 添加发光效果 */
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.1);
+}
+
+/* 活动项样式增强 */
+.nav-parent.active, .nav-link.active, .nav-sub-parent.active {
+    background: rgba(0, 243, 255, 0.15);
+    border: 1px solid rgba(0, 243, 255, 0.3);
+    /* 左侧边框加粗 */
+    border-left: 3px solid var(--accent-blue);
+}
+
+/* 为子菜单添加分隔线 */
+.nav-children {
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.nav-children::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    height: 100%;
+    width: 1px;
+    background: linear-gradient(to bottom, 
+                               rgba(0, 243, 255, 0.1), 
+                               rgba(0, 243, 255, 0.3), 
+                               rgba(0, 243, 255, 0.1));
+}
+
+/* =========================      导航项样式增强 - 目录悬停效果   ↑     =========================== */
+
 
 
 /* 标题样式 */
 h1, h2, h3 {
+/* h1 , h2 { */
     font-family: 'Orbitron', sans-serif;
     background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
     -webkit-background-clip: text;
     color: transparent;
 }
 
+
+
 /* 主要内容卡片样式 */
-.content-card {
+/* .content-card {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 15px;
     padding: 2rem;
@@ -253,6 +322,30 @@ h1, h2, h3 {
     border: 1px solid rgba(0, 243, 255, 0.1);
     box-shadow: 0 4px 20px rgba(0, 243, 255, 0.05);
     backdrop-filter: blur(10px);
+} */
+/* 原854行  覆盖313行冗余代码 -- 内容卡片样式 - 添加z-index */
+/* .content-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem; */
+    /* 下面这行代码好像是无效代码，可能和head.css 中代码冲突了 ，有空看一看 */
+    /* 增加边框透明度，使其更加明显 0.1--> 0.3 */
+    /* border: 1px solid rgba(0, 243, 255, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 243, 255, 0.05);
+    backdrop-filter: blur(10px); */
+    /* 创建新的层叠上下文 */
+    /* position: relative;  */
+     /* 确保卡片在星星上方 */
+    /* z-index: 2;
+} */
+
+/* 主内容区调整 - 添加z-index确保内容在星星上方 */
+.content {
+    margin-left: 280px;
+    padding: 2rem 3rem;
+    position: relative; /* 创建新的层叠上下文 */
+    z-index: 1; /* 确保内容在星星上方 */
 }
 
 /* 动画效果 */
@@ -691,3 +784,222 @@ h1, h2, h3 {
         height: 16px;
     }
 }
+/* ================= 新手入门模块样式 ================= */
+.beginner-guide {
+    background: rgba(26, 26, 46, 0.6);
+    border: 1px solid rgba(0, 243, 255, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 243, 255, 0.05);
+    transition: all 0.3s ease;
+    position: relative; /* 创建新的层叠上下文 */
+    z-index: 2; /* 确保内容在星星上方 */
+    overflow: visible; /* 确保星星可以溢出容器 */
+}
+
+.beginner-guide:hover {
+    border-color: var(--accent-blue);
+    box-shadow: 0 8px 32px rgba(0, 243, 255, 0.1);
+}
+
+.guide-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.guide-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    color: var(--accent-green);
+}
+
+.guide-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.guide-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.guide-step {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+.guide-step::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 8px;
+    height: 8px;
+    background: var(--accent-blue);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent-blue);
+}
+
+.guide-step:last-child {
+    margin-bottom: 0;
+}
+
+.guide-step-content {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.guide-action {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.5rem 1.5rem;
+    background: rgba(0, 243, 255, 0.1);
+    border: 1px solid var(--accent-blue);
+    border-radius: 6px;
+    color: var(--accent-blue);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.guide-action:hover {
+    background: rgba(0, 243, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 243, 255, 0.2);
+}
+
+
+
+/* =========================星星容器样式优化 - 调整为适应整个页面==========================*/
+.stars-container {
+    position: fixed;
+    top: 60px; /* 顶部导航栏高度 */
+    left: 280px; /* 侧边导航栏宽度 */
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    pointer-events: none; /* 确保不影响交互 */
+    z-index: -1; /* 确保在所有内容元素下方 */
+    opacity: 0; /* 初始状态不显示 */
+    transition: opacity 1.5s ease;
+}
+
+.stars-container.visible {
+    opacity: 0.9; /* 可见状态时的透明度适当降低 */
+}
+
+/* 渐变背景效果 - 从中心向四周发散 */
+.stars-container::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(41, 61, 102, 0.4) 0%,
+        rgba(26, 42, 76, 0.2) 40%,
+        rgba(10, 25, 47, 0) 100%
+    );
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* 星星样式简化 - 使用白色系 */
+.stars, .stars2, .stars3, .stars4, .stars5 {
+    position: absolute;
+    border-radius: 50%;
+    background: #fff;
+    filter: blur(0.5px);
+}
+
+.stars {
+    width: 1px;
+    height: 1px;
+    box-shadow: 0 0 3px 1px rgba(255, 255, 255, 0.7);
+    animation: twinkle 4s ease-in-out infinite;
+}
+
+.stars2 {
+    width: 1.5px;
+    height: 1.5px;
+    box-shadow: 0 0 4px 1px rgba(255, 255, 255, 0.8);
+    animation: twinkle 5s ease-in-out infinite;
+}
+
+.stars3 {
+    width: 2px;
+    height: 2px;
+    box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.9);
+    animation: twinkle 6s ease-in-out infinite;
+}
+
+.stars4 {
+    width: 2.5px;
+    height: 2.5px;
+    box-shadow: 0 0 6px 2px rgba(255, 255, 255, 1);
+    animation: twinkle 7s ease-in-out infinite;
+}
+
+.stars5 {
+    width: 3px;
+    height: 3px;
+    box-shadow: 0 0 8px 2px rgba(100, 255, 218, 0.9);
+    animation: twinkle 8s ease-in-out infinite;
+    filter: blur(0.7px);
+}
+
+/* 星星闪烁动画优化 */
+@keyframes twinkle {
+    0% {
+        opacity: 0.2;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    100% {
+        opacity: 0.2;
+        transform: scale(0.8);
+    }
+}
+
+/* 添加星星漂移动画 */
+@keyframes drift {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+    50% {
+        transform: translateX(var(--drift-x, 10px)) translateY(var(--drift-y, 5px));
+    }
+    100% {
+        transform: translateX(0) translateY(0);
+    }
+}
+
+/* 为部分星星添加漂移效果 */
+.stars3, .stars4, .stars5 {
+    animation: twinkle 6s ease-in-out infinite, drift 30s linear infinite;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .stars-container {
+        left: 0; /* 在移动设备上侧边栏不固定 */
+    }
+}
+
+/* 删除重复的beginner-guide定义 */

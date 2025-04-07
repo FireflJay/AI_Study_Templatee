@@ -42,7 +42,7 @@ const contents = [
     },
     { 
         title: 'Cursor AI', 
-        description: '探索人类历史上最伟大的文明', 
+        description: '探索AI对于编程的赋能', 
         image: 'https://picsum.photos/300/200?random=5', 
         category: 'code', 
         link: 'AI_ToolsMatrix/Template_TM.html' 
@@ -124,8 +124,10 @@ function createContentCard(item) {
     const card = document.createElement('div');
     card.className = 'content-card';
     //         <a href="/AI_ToolsMatrix/Template_TM.html" target="_blank">
+    //点击Tools卡片跳转新页面： <a href="${item.link}" target="_blank">
+
     card.innerHTML = `
-            <a href="${item.link}" target="_blank">
+            <a href="${item.link}">
             <img src="${item.image}" alt="${item.title}">
             <div class="card-content">
                 <h3 class="card-title">${item.title}</h3>
